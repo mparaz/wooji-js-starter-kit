@@ -1,0 +1,6 @@
+# Files:
+*.log
+
+# Directories:
+node_modules/
+public/
