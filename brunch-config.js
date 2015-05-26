@@ -1,11 +1,11 @@
 module.exports = {
     config: {
         files: {
-            javascripts: {
-                joinTo: 'app.js'
-            },
             stylesheets: {
-                joinTo: 'app.css'
+                joinTo: './css/styles.css'
+            },
+            javascripts: {
+                joinTo: './js/scripts.js'
             }
         }
     }

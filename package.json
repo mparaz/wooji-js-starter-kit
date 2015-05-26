@@ -1,10 +1,29 @@
 {
   "name": "wooji-js-starter-kit",
   "version": "0.0.1",
-  "private": true,
+  "description": "wooji.js Starter Kit",
+  "scripts": {
+    "g:list": "ls $(npm root -g)",
+    "g:install": "npm install -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
+    "g:uninstall": "npm uninstall -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
+    "start": "brunch watch --server",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wooji-js/wooji-js-starter-kit.git"
+  },
+  "author": "ejelome <ejelome@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wooji-js/wooji-js-starter-kit/issues"
+  },
+  "homepage": "https://github.com/wooji-js/wooji-js-starter-kit#readme",
   "devDependencies": {
-    "brunch": "^1.8.3",
     "javascript-brunch": "^1.7.1",
     "sass-brunch": "^1.8.10"
-  }
+  },
+  "globalDependencies": [
+    "brunch"
+  ]
 }
