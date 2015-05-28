@@ -19,11 +19,28 @@
     "url": "https://github.com/wooji-js/wooji-js-starter-kit/issues"
   },
   "homepage": "https://github.com/wooji-js/wooji-js-starter-kit#readme",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
   "devDependencies": {
+    "babelify": "^6.1.2",
     "browser-sync": "^2.7.1",
-    "gulp": "^3.8.11"
+    "browserify": "^10.2.1",
+    "browserify-global-shim": "^1.0.0",
+    "browserify-shim": "^3.8.7",
+    "gulp": "^3.8.11",
+    "vinyl-source-stream": "^1.1.0"
   },
   "globalDependencies": [
     "gulp"
-  ]
+  ],
+  "browserify-global-shim": {
+    "react": "React"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "browserify-global-shim"
+    ]
+  }
 }
