@@ -6,7 +6,7 @@
     "g:list": "ls $(npm root -g)",
     "g:install": "npm install -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
     "g:uninstall": "npm uninstall -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
-    "start": "brunch watch --server",
+    "start": "iojs --harmony_arrow_functions $(which gulp)",
     "test": "test"
   },
   "repository": {
@@ -20,11 +20,10 @@
   },
   "homepage": "https://github.com/wooji-js/wooji-js-starter-kit#readme",
   "devDependencies": {
-    "babel-brunch": "^5.1.2",
-    "browser-sync-brunch": "0.0.9",
-    "cssnext-brunch": "^1.0.0"
+    "browser-sync": "^2.7.1",
+    "gulp": "^3.8.11"
   },
   "globalDependencies": [
-    "brunch"
+    "gulp"
   ]
 }
