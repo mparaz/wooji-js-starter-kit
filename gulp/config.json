@@ -1,0 +1,34 @@
+{
+  "public":  {
+    "init": true,
+    "path": {
+      "base":  "./app/public/",
+      "src":  "./app/public/**/*",
+      "dest":  "./www/"
+    }
+  },
+  "scripts":  {
+    "init": true,
+    "path":  {
+      "entryFile":  "./app/app.jsx",
+      "src":  "./app/scripts/**/*",
+      "source":  "scripts.js",
+      "dest":  "./www/js/"
+    }
+  },
+  "styles":  {
+    "init": true,
+    "path":  {
+      "entryFile":  "./app/styles/styles.css",
+      "src":  "./app/styles/**/*",
+      "dest":  "./www/css/"
+    }
+  },
+  "server":  {
+    "init": false,
+    "path":  {
+      "src":  "./app/**/*",
+      "dest":  "./www/"
+    }
+  }
+}
