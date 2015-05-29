@@ -1,0 +1,9 @@
+@import "./_partials/base";
+
+h1 {
+    color: var(--fontColor);
+
+    sample {
+        font-style: italic;
+    }
+}

@@ -3,66 +3,92 @@
 const gulp = require('gulp'),
       browserSync = require('browser-sync'),
       browserify = require('browserify'),
-      watchify = require('watchify'),
       source = require('vinyl-source-stream'),
+      postcss = require('gulp-postcss'),
+      cssnext = require('cssnext'),
+      cssNested = require('postcss-nested'),
+      cssVariables = require('postcss-css-variables'),
 
       dependencies = require('./package.json').dependencies;
 
-let globals = Object.keys(dependencies),
-    taskPath = {
-        public: {
-            base: './app/public/',
-            src: './app/public/**/*',
-            dest: './www/'
-        },
-        scripts: {
-            entries: './app/app.jsx',
-            src: './app/scripts/**/*',
-            source: 'scripts.js',
-            dest: './www/js/'
-        },
-        serve: {
-            src: './app/**/*',
-            dest: './www/'
-        }
-    };
+let paths = {
+    public: {
+        base: './app/public/',
+        src: './app/public/**/*',
+        dest: './www/'
+    },
+    scripts: {
+        entries: './app/app.jsx',
+        src: './app/scripts/**/*',
+        source: 'scripts.js',
+        dest: './www/js/'
+    },
+    styles: {
+        entries: './app/styles/styles.css',
+        src: './app/styles/**/*',
+        dest: './www/css/'
+    },
+    serve: {
+        src: './app/**/*',
+        dest: './www/'
+    }
+},
+    tasks = Object.keys(paths).slice(0, -1);
 
 gulp.task('public', () => {
-    gulp.src(taskPath.public.src, {
-        base: taskPath.public.base
-    }).pipe(gulp.dest(taskPath.public.dest));
+    let options = {
+        base: paths.public.base
+    };
+
+    gulp.src(paths.public.src, options)
+        .pipe(gulp.dest(paths.public.dest));
 });
 
 gulp.task('scripts', () => {
-    browserify(taskPath.scripts.entries)
+    let globals = Object.keys(dependencies);
+
+    browserify(paths.scripts.entries)
         .external(globals)
         .bundle()
-        .pipe(source(taskPath.scripts.source))
-        .pipe(gulp.dest(taskPath.scripts.dest));
+        .pipe(source(paths.scripts.source))
+        .pipe(gulp.dest(paths.scripts.dest));
 });
 
-gulp.task('serve', () => {
-    browserSync.init({
-        server: {
-            reloadDelay: 5000,
-            baseDir: taskPath.serve.dest
-        }
-    });
+gulp.task('styles', () => {
+    let processors = [
+        cssnext,
+        cssNested,
+        cssVariables
+    ];
 
-    Object.keys(taskPath).forEach(task => {
+    gulp.src(paths.styles.entries)
+        .pipe(postcss(processors))
+        .pipe(gulp.dest(paths.styles.dest));
+});
+
+gulp.task('serve', [tasks], () => {
+    let options = {
+        server: {
+            baseDir: paths.serve.dest
+        }
+    };
+
+    browserSync.init(options);
+
+    Object.keys(paths).forEach(task => {
         if (task !== 'serve') {
-            if (task === 'scripts') {
-                taskPath[task].src = [
-                    taskPath[task].entries,
-                    taskPath[task].src
+            if (['scripts', 'styles'].indexOf(task) !== -1) {
+                paths[task].src = [
+                    paths[task].entries,
+                    paths[task].src
                 ];
             }
 
-            gulp.watch(taskPath[task].src, [task]);
+            gulp.watch(paths[task].src, [task]);
         }
     });
 
-    gulp.watch(taskPath.serve.src, browserSync.reload);
+    gulp.watch(paths.serve.src, browserSync.reload);
 });
 
 gulp.task('default', ['serve']);
