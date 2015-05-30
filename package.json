@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "wooji.js Starter Kit",
   "scripts": {
-    "g:list": "ls $(npm root -g)",
-    "g:install": "npm install -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
-    "g:uninstall": "npm uninstall -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
+    "list:g": "ls $(npm root -g)",
+    "install:g": "npm install -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
+    "uninstall:g": "npm uninstall -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
+    "install:all": "npm install && npm run install:g",
     "start": "iojs --harmony_arrow_functions $(which gulp)",
     "test": "test"
   },
@@ -26,26 +27,21 @@
     "babelify": "^6.1.2",
     "browser-sync": "^2.7.1",
     "browserify": "^10.2.1",
-    "browserify-global-shim": "^1.0.0",
-    "browserify-shim": "^3.8.7",
     "cssnext": "^1.5.2",
     "gulp": "^3.8.11",
     "gulp-postcss": "^5.1.8",
+    "gulp-rename": "^1.2.2",
     "postcss-css-variables": "^0.3.8",
+    "postcss-import": "^5.2.2",
     "postcss-nested": "^0.3.1",
-    "require-dir": "^0.3.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "globalDependencies": [
     "gulp"
   ],
-  "browserify-global-shim": {
-    "react": "React"
-  },
   "browserify": {
     "transform": [
-      "babelify",
-      "browserify-global-shim"
+      "babelify"
     ]
   }
 }

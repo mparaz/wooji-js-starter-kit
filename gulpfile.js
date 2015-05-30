@@ -1,19 +1,16 @@
 'use strict';
 
 const gulp = require('gulp'),
-      dir = require('require-dir'),
 
       config = require('./gulp/config.json');
 
-let files = dir('./gulp/'),
-    tasks = Object.keys(files).filter(task => {
-        let validTasks = Object.keys(config);
-
-        if (validTasks.indexOf(task) !== -1) {
-            return task;
-        }
-
-        return false;
+let tasks = Object.keys(config.task),
+    defaultTasks = tasks.filter(taskName => {
+        return config.task[taskName].default;
     });
 
-gulp.task('default', tasks);
+tasks.map(file => {
+    require('./gulp/tasks/' + file + '.js');
+});
+
+gulp.task('default', defaultTasks);

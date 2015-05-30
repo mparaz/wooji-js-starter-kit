@@ -1,34 +1,58 @@
 {
-  "public":  {
-    "init": true,
-    "path": {
-      "base":  "./app/public/",
-      "src":  "./app/public/**/*",
-      "dest":  "./www/"
-    }
-  },
-  "scripts":  {
-    "init": true,
-    "path":  {
-      "entryFile":  "./app/app.jsx",
-      "src":  "./app/scripts/**/*",
-      "source":  "scripts.js",
-      "dest":  "./www/js/"
-    }
-  },
-  "styles":  {
-    "init": true,
-    "path":  {
-      "entryFile":  "./app/styles/styles.css",
-      "src":  "./app/styles/**/*",
-      "dest":  "./www/css/"
-    }
-  },
-  "server":  {
-    "init": false,
-    "path":  {
-      "src":  "./app/**/*",
-      "dest":  "./www/"
+  "task": {
+    "public":  {
+      "default": false,
+      "init": true,
+      "path": {
+        "base":  "./app/public/",
+        "src":  "./app/public/**/*",
+        "dest":  "./www/"
+      },
+      "options": {
+        "base": "./app/public/"
+      }
+    },
+    "scripts":  {
+      "default": false,
+      "init": true,
+      "path":  {
+        "entryFile":  "./app/app.jsx",
+        "src":  "./app/scripts/**/*",
+        "source":  "scripts.js",
+        "dest":  "./www/js/"
+      },
+      "shims": [
+        "react"
+      ]
+    },
+    "styles":  {
+      "default": false,
+      "init": true,
+      "path":  {
+        "entryFile":  "./app/styles/app.css",
+        "src":  "./app/styles/**/*",
+        "newFile":  "styles.css",
+        "dest":  "./www/css/"
+      },
+      "processors": [
+        "cssnext",
+        "postcss-import",
+        "postcss-nested",
+        "postcss-css-variables"
+      ]
+    },
+    "server":  {
+      "default": true,
+      "init": false,
+      "path":  {
+        "src":  "./app/**/*",
+        "dest":  "./www/"
+      },
+      "options": {
+        "server": {
+          "baseDir": "./www/"
+        }
+      }
     }
   }
 }

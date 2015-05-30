@@ -1,4 +1,4 @@
-@import "./_partials/base";
+@import "./_partials/base.css";
 
 h1 {
     color: var(--fontColor);
