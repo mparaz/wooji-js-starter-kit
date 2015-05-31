@@ -10,7 +10,9 @@ let tasks = Object.keys(config.task),
     });
 
 tasks.map(file => {
-    require('./gulp/tasks/' + file + '.js');
+    let path = `./gulp/tasks/${file}.js`;
+
+    require(path);
 });
 
 gulp.task('default', defaultTasks);
