@@ -1,12 +1,12 @@
 {
   "name": "wooji-js-starter-kit",
   "version": "0.0.1",
-  "description": "wooji.js Starter Kit",
+  "description": "React with CSS and JS of the future",
   "scripts": {
     "list:g": "ls $(npm root -g)",
     "install:g": "npm install -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
     "uninstall:g": "npm uninstall -g $(iojs -p \"require('./package.json').globalDependencies.join(' ')\")",
-    "install:all": "npm install && npm run install:g",
+    "install:all": "npm run install:g && npm install",
     "start": "iojs --harmony_arrow_functions $(which gulp)",
     "test": "test"
   },
